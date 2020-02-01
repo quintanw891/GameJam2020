@@ -18,12 +18,12 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position = new Vector3(transform.position.x, transform.position.y - verticalSpeed, transform.position.z);
+        transform.position = new Vector3(transform.position.x, transform.position.y - (verticalSpeed * Time.deltaTime), transform.position.z);
         //Debug.Log("Value" + transform.localScale.y);
-        if (transform.position.y <= ground.transform.position.y)
-        {
-            healthController.GetComponent<HealthController>().health--;
-            gameObject.SetActive(false);
-        }
+        //if (transform.position.y <= ground.transform.position.y)
+        //{
+        //    healthController.GetComponent<HealthController>().health--;
+        //    gameObject.SetActive(false);
+        //}
     }
 }

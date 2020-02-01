@@ -55,8 +55,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Enemy.cs" />
-     <Compile Include="Assets\HealthController.cs" />
+     <Compile Include="Assets\Bill\Scripts\Enemy.cs" />
+     <Compile Include="Assets\Bill\Scripts\EnemySpawner.cs" />
+     <Compile Include="Assets\Bill\Scripts\HealthController.cs" />
+     <Compile Include="Assets\Bill\Scripts\Projectile.cs" />
+     <Compile Include="Assets\Bill\Scripts\Robot.cs" />
  <Reference Include="Unity.Timeline.Editor">
  <HintPath>C:/Users/William/Documents/GitHub/GameJam2020/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
  </Reference>
