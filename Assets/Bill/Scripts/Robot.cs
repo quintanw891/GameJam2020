@@ -9,7 +9,7 @@ public class Robot : MonoBehaviour
     public Projectile projectile;
     public float fireRate;
     private float nextFire;
-    public EnemySpawner enemySpawner;
+    public Enemy_Manager enemyManager;
     private Rigidbody2D rb;
     public float speed;
 
@@ -26,15 +26,16 @@ public class Robot : MonoBehaviour
     {
         //Move toward next target enemy
         float direction;
-        if (enemySpawner.spawnedEnemies.Count > 0)
+        if (enemyManager.enemyList.Count > 0)
         {
-            Enemy enemy = enemySpawner.spawnedEnemies[enemySpawner.spawnedEnemies.Count - 1];
+            //GameObject enemy = enemyManager.enemyList[enemyManager.enemyList.Count - 1];
+            GameObject enemy = enemyManager.enemyList[0];
             direction = 1f;
-            if (transform.position.x > enemy.transform.position.x)
+            if (transform.position.x > enemy.transform.Find("Enemy_Sprite").transform.position.x)
             {
                 direction = -1f;
             }
-            rb.velocity = new Vector2(Mathf.Abs(transform.position.x - enemy.transform.position.x) * direction, 0f);
+            rb.velocity = new Vector2(Mathf.Abs(transform.position.x - enemy.transform.Find("Enemy_Sprite").transform.position.x) * direction, 0f);
             //Debug.Log("Robo: " + transform.position.x + "  Enemy: " + enemy.transform.position.x);
 
             //Fire projectiles at a fixed rate
