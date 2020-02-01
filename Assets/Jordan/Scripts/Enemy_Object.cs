@@ -16,10 +16,13 @@ public class Enemy_Object : MonoBehaviour
         transform.Translate(Vector3.down * (Time.deltaTime * 0.5f));
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.collider.CompareTag("Projectile"))
+        Debug.Log("OUTER");
+        if (collision.collider.CompareTag("Projectile") ||
+            collision.collider.CompareTag("Ground"))
         {
+            Debug.Log("CONTACT");
             Destroy(collision.collider);
             Destroy(this);
         }
