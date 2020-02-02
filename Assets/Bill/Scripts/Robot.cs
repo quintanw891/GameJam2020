@@ -5,44 +5,69 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class Robot : MonoBehaviour
 {
-    private bool repaired;
+    private bool inBattle;
+    public float degradeRate;
+    private float nextRepair;
+    public PuzzleController puzzleController;
     public Projectile projectile;
     public float fireRate;
     private float nextFire;
     public Enemy_Manager enemyManager;
     private Rigidbody2D rb;
     public float speed;
+    public Color newColor;
+    public Color oldColor;
 
     // Start is called before the first frame update
     void Start()
     {
-        repaired = true;
         rb = GetComponent<Rigidbody2D>();
         nextFire = Time.time;
+        EnterBattle();
     }
 
     // Update is called once per frame
     void Update()
     {
-        //Move toward next target enemy
-        float direction;
-        if (enemyManager.enemyList.Count > 0)
+        if (inBattle)
         {
-            //GameObject enemy = enemyManager.enemyList[enemyManager.enemyList.Count - 1];
-            GameObject enemy = enemyManager.enemyList[0];
-            direction = 1f;
-            if (transform.position.x > enemy.transform.Find("Enemy_Sprite").transform.position.x)
+            //Move toward next target enemy
+            float direction;
+            if (enemyManager.enemyList.Count > 0)
             {
-                direction = -1f;
-            }
-            rb.velocity = new Vector2(Mathf.Abs(transform.position.x - enemy.transform.Find("Enemy_Sprite").transform.position.x) * direction, 0f);
-            //Debug.Log("Robo: " + transform.position.x + "  Enemy: " + enemy.transform.position.x);
+                //GameObject enemy = enemyManager.enemyList[enemyManager.enemyList.Count - 1];
+                GameObject enemy = enemyManager.enemyList[0];
+                direction = 1f;
+                if (transform.position.x > enemy.transform.Find("Enemy_Sprite").transform.position.x)
+                {
+                    direction = -1f;
+                }
+                rb.velocity = new Vector2(Mathf.Abs(transform.position.x - enemy.transform.Find("Enemy_Sprite").transform.position.x) * direction, 0f);
+                //Debug.Log("Robo: " + transform.position.x + "  Enemy: " + enemy.transform.position.x);
 
-            //Fire projectiles at a fixed rate
-            if (Time.time > nextFire)
-            {
-                Fire();
+                //Fire projectiles at a fixed rate
+                if (Time.time > nextFire)
+                {
+                    Fire();
+                }
             }
+            //Change color
+            GetComponent<SpriteRenderer>().color = Color.Lerp(oldColor, newColor, (nextRepair - Time.time)/degradeRate);
+            //Leave battle when time is up
+            if (Time.time > nextRepair)
+            {
+                LeaveBattle();
+            }
+        }
+    }
+
+    //Remove robot from the field when clicked
+    void OnMouseOver()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            //Debug.Log("CLICKED");
+            LeaveBattle();
         }
     }
 
@@ -50,5 +75,21 @@ public class Robot : MonoBehaviour
     {
         nextFire = Time.time + fireRate;
         Instantiate(projectile, transform.position, Quaternion.identity);
+    }
+
+    public void EnterBattle()
+    {
+        //Debug.Log("ENTER");
+        GetComponent<SpriteRenderer>().enabled = true;
+        inBattle = true;
+        nextRepair = Time.time + degradeRate;
+    }
+
+    public void LeaveBattle()
+    {
+        //Debug.Log("LEAVE");
+        GetComponent<SpriteRenderer>().enabled = false;
+        inBattle = false;
+        puzzleController.GetComponent<PuzzleController>().resetPuzzle();
     }
 }

@@ -23,17 +23,15 @@ public class Puzzle : MonoBehaviour
         {
             child.position = new Vector2( gameObject.transform.position.x + (Random.Range(-3f,3f)) , gameObject.transform.position.y + (Random.Range(-3f,3f)) );
         }
-
-
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(selectedGroup != null && selectedGroup.transform.childCount == piecesCount) // create a win condition
+        if (selectedGroup != null && selectedGroup.transform.childCount == piecesCount) // create a win condition
         {
             Debug.Log("Puzzle Complete");
-            //robot.EnterBattle();
+            robot.EnterBattle();
             Destroy(gameObject);
         }
     }

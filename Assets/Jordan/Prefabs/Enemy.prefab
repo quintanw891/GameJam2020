@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5145483549966095614}
   m_Layer: 0
   m_Name: Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -95,5 +95,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   verticalSpeed: 0.01
-  ground: {fileID: 0}
-  healthController: {fileID: 0}
+  healthController: {fileID: 7162564452785469765, guid: 1d6bad8ec1faea2419d77f07a93fcac9,
+    type: 3}

@@ -6,7 +6,6 @@ public class Enemy : MonoBehaviour
 {
 
     public float verticalSpeed;
-    public GameObject ground;
     public GameObject healthController;
 
     // Start is called before the first frame update
@@ -29,6 +28,11 @@ public class Enemy : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("hello");
+        if (collision.CompareTag("Projectile"))
+        {
+            Destroy(collision.gameObject);
+        }
+        GameObject.Find("Enemy_Manager").GetComponent<Enemy_Manager>().enemyList.Remove(gameObject.transform.parent.gameObject);
+        Destroy(gameObject);
     }
 }

@@ -97,8 +97,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   verticalSpeed: 0.01
-  ground: {fileID: 0}
-  healthController: {fileID: 0}
+  healthController: {fileID: 7162564452785469765, guid: 1d6bad8ec1faea2419d77f07a93fcac9,
+    type: 3}
 --- !u!50 &930658124744468739
 Rigidbody2D:
   serializedVersion: 4
