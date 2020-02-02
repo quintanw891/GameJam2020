@@ -2,8 +2,6 @@
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <LangVersion>latest</LangVersion>
-    <CscToolPath>C:\Program Files\Unity\Hub\Editor\2019.3.0f6\Editor\Data\Tools\RoslynScripts</CscToolPath>
-    <CscToolExe>unity_csc.bat</CscToolExe>
   </PropertyGroup>
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -65,6 +63,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Art\HealthHeartSystem\Scripts\HealthBarController.cs" />
+    <Compile Include="Assets\Art\HealthHeartSystem\Scripts\HealthBarHUDTester.cs" />
+    <Compile Include="Assets\Art\HealthHeartSystem\Scripts\PlayerStats.cs" />
     <Compile Include="Assets\Bill\Scripts\Enemy.cs" />
     <Compile Include="Assets\Bill\Scripts\EnemySpawner.cs" />
     <Compile Include="Assets\Bill\Scripts\HealthController.cs" />
@@ -75,6 +76,11 @@
     <Compile Include="Assets\Jordan\Scripts\Enemy_Object.cs" />
     <Compile Include="Assets\Jordan\Scripts\Jordan_Enemy.cs" />
     <Compile Include="Assets\Jordan\Scripts\Jordan_HealthController.cs" />
+    <Compile Include="Assets\RobotParts\Puzzle.cs" />
+    <Compile Include="Assets\RobotParts\PuzzleController.cs" />
+    <Compile Include="Assets\RobotParts\PuzzlePiece.cs" />
+    <None Include="Assets\Art\HealthHeartSystem\readme.txt" />
+    <None Include="Assets\Art\Robot Shooting Game\Read Me.txt" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>C:/Users/tewellj/Documents/GitHub/GameJam2020/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
