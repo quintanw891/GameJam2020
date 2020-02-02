@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class HealthDisplay : MonoBehaviour
 {
@@ -32,7 +33,7 @@ public class HealthDisplay : MonoBehaviour
         }
         if (health <= 0)
         {
-            Debug.Log("DEATH");
+            SceneManager.LoadScene("GameOverScene");
             gameObject.SetActive(false);
         }
     }
