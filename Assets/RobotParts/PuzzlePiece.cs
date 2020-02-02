@@ -16,8 +16,8 @@ public class PuzzlePiece : MonoBehaviour
     public PuzzlePiece botPiece;
     public bool botConnected;
 
-    private int lockRange = 1;
-    private int distance = 1;
+    private float lockRange = 1f;
+    private float distance = 1f;
 
     // Start is called before the first frame update
     void Start()
@@ -29,7 +29,7 @@ public class PuzzlePiece : MonoBehaviour
     void Update()
     {
 
-        Vector2 mousePos = Input.mousePosition;
+        Vector2 mousePos = Input.mousePosition; // Allow for item to follow mouse
         Vector3 screenPos = new Vector3(mousePos.x, mousePos.y, 10);
 
         if(selected == true)
@@ -46,7 +46,7 @@ public class PuzzlePiece : MonoBehaviour
         }
 
 
-        if (this == puzzleManager.selectedPiece || puzzleGroup == puzzleManager.selectedGroup)
+        if (this == puzzleManager.selectedPiece || puzzleGroup == puzzleManager.selectedGroup) // check to see if a piece is next to another
         {
             
         if (rightPiece != null)
@@ -55,8 +55,8 @@ public class PuzzlePiece : MonoBehaviour
 
             if(rightConnected != true && puzzleManager.selecting == false)
             {
-                if(((int)transform.position.x /lockRange) == ((int)rightTransform.position.x /lockRange)-distance
-                && ((int)transform.position.y /lockRange) == ((int)rightTransform.position.y /lockRange))
+                if( ( (Mathf.Round(transform.position.x * lockRange)/lockRange) == ((Mathf.Round(rightTransform.position.x * lockRange)/lockRange)-distance ) )
+                && ( (Mathf.Round(transform.position.y * lockRange)/lockRange) == ((Mathf.Round(rightTransform.position.y * lockRange)/lockRange)) ) ) 
                 {
                     selected = false;
                     rightConnected = true;
@@ -72,8 +72,8 @@ public class PuzzlePiece : MonoBehaviour
 
             if(leftConnected != true && puzzleManager.selecting == false)
             {
-                if(((int)transform.position.x /lockRange) == ((int)leftTransform.position.x /lockRange)+distance
-                && ((int)transform.position.y /lockRange) == ((int)leftTransform.position.y /lockRange))
+                if( ( (Mathf.Round(transform.position.x * lockRange)/lockRange) == ((Mathf.Round(leftTransform.position.x * lockRange)/lockRange)+distance ) )
+                && ( (Mathf.Round(transform.position.y * lockRange)/lockRange) == ((Mathf.Round(leftTransform.position.y * lockRange)/lockRange)) ) ) 
                     {
                         selected = false;
                         leftConnected = true;
@@ -90,8 +90,8 @@ public class PuzzlePiece : MonoBehaviour
 
             if(topConnected != true && puzzleManager.selecting == false)
             {
-                if(((int)transform.position.x /lockRange) == ((int)topTransform.position.x /lockRange)
-                && ((int)transform.position.y /lockRange) == ((int)topTransform.position.y /lockRange)-distance)
+                if( ( (Mathf.Round(transform.position.x * lockRange)/lockRange) == ((Mathf.Round(topTransform.position.x * lockRange)/lockRange)) )
+                && ( (Mathf.Round(transform.position.y * lockRange)/lockRange) == ((Mathf.Round(topTransform.position.y * lockRange)/lockRange)-distance) ) ) 
                 {
                     selected = false;
                     topConnected = true;
@@ -107,8 +107,8 @@ public class PuzzlePiece : MonoBehaviour
 
             if(botConnected != true && puzzleManager.selecting == false)
             {
-                if(((int)transform.position.x /lockRange) == ((int)botTransform.position.x /lockRange)
-                && ((int)transform.position.y /lockRange) == ((int)botTransform.position.y /lockRange)+distance)
+                if( ( (Mathf.Round(transform.position.x * lockRange)/lockRange) == ((Mathf.Round(botTransform.position.x * lockRange)/lockRange)) )
+                && ( (Mathf.Round(transform.position.y * lockRange)/lockRange) == ((Mathf.Round(botTransform.position.y * lockRange)/lockRange)+distance) ) ) 
                 {
                     selected = false;
                     botConnected = true;
@@ -121,12 +121,17 @@ public class PuzzlePiece : MonoBehaviour
 
     }
 
-    void groupPuzzles(PuzzlePiece otherPiece, char c)
+    void groupPuzzles(PuzzlePiece otherPiece, char c) // group connected piece to a single GameObject and lock the pieces to eachother
     {
+        if (puzzleManager.canConnect == true && (puzzleGroup != otherPiece.puzzleGroup || puzzleGroup == null))
+        {
+            puzzleManager.canConnect = false;
+
         if(puzzleGroup == null && otherPiece.puzzleGroup == null)
         {
             GameObject newGroup = new GameObject();
             newGroup.transform.position = gameObject.transform.position;
+            newGroup.transform.parent = puzzleManager.gameObject.transform;
             transform.SetParent(newGroup.transform);
             puzzleGroup = newGroup;
             otherPiece.gameObject.transform.SetParent(newGroup.transform);
@@ -197,26 +202,26 @@ public class PuzzlePiece : MonoBehaviour
 
         else if(puzzleGroup != null && otherPiece.puzzleGroup != null)
         {
-            int count = 0;
-            foreach (Transform t in otherPiece.puzzleGroup.transform)
+
+            GameObject toBeDestroyed = otherPiece.puzzleGroup;
+            int count = toBeDestroyed.transform.childCount;
+
+            while (count > 0)
             {
-                Debug.Log(count++);   
+                PuzzlePiece piece = toBeDestroyed.transform.GetChild(count - 1).GetComponent<PuzzlePiece>();
+                piece.puzzleGroup = puzzleGroup;
+                piece.gameObject.transform.parent = puzzleGroup.transform;
+                count--;
             }
 
-            otherPiece.puzzleGroup.transform.parent = puzzleGroup.transform;
-
-            for (int i = count - 1; i >= -1; i--)
-            {
-                otherPiece.puzzleGroup.transform.GetChild(0).GetComponent<PuzzlePiece>().puzzleGroup = puzzleGroup;
-                otherPiece.puzzleGroup.transform.GetChild(0).parent = puzzleGroup.transform;
-            }
-
+            Destroy(toBeDestroyed);
             
-            
+        }
+            puzzleManager.canConnect = true;
         }
     }
 
-    void OnMouseOver()
+    void OnMouseOver() //determine when to start dragging
     {
         if(Input.GetMouseButtonDown(0))
         {
@@ -228,7 +233,7 @@ public class PuzzlePiece : MonoBehaviour
         }
     }
 
-    void OnMouseUp()
+    void OnMouseUp() //determin when to stop dragging
     {
         selected = false;
         puzzleManager.selecting = false;
