@@ -27,15 +27,8 @@ public class Enemy : MonoBehaviour
         //}
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("OUTER");
-        if (collision.collider.CompareTag("Projectile") ||
-            collision.collider.CompareTag("Ground"))
-        {
-            Debug.Log("CONTACT");
-            Destroy(collision.collider);
-            Destroy(this);
-        }
+        Debug.Log("hello");
     }
 }

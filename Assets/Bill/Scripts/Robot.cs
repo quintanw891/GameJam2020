@@ -51,7 +51,7 @@ public class Robot : MonoBehaviour
                 }
             }
             //Change color
-            //GetComponent<SpriteRenderer>().color = Color.Lerp();
+            GetComponent<SpriteRenderer>().color = Color.Lerp();
             //Leave battle when time is up
             if (Time.time > nextRepair)
             {
