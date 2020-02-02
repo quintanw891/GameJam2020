@@ -849,10 +849,55 @@ PrefabInstance:
       propertyPath: enemyManager
       value: 
       objectReference: {fileID: 1092244447}
+    - target: {fileID: 907750269252520505, guid: e479e1e01e728fc49a61a1aec80ec030,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 907750269252520505, guid: e479e1e01e728fc49a61a1aec80ec030,
+        type: 3}
+      propertyPath: degradeRate
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 907750269252520505, guid: e479e1e01e728fc49a61a1aec80ec030,
+        type: 3}
+      propertyPath: newColor.r
+      value: 0.48584908
+      objectReference: {fileID: 0}
+    - target: {fileID: 907750269252520505, guid: e479e1e01e728fc49a61a1aec80ec030,
+        type: 3}
+      propertyPath: newColor.g
+      value: 0.59832424
+      objectReference: {fileID: 0}
+    - target: {fileID: 907750269252520505, guid: e479e1e01e728fc49a61a1aec80ec030,
+        type: 3}
+      propertyPath: newColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 907750269252520505, guid: e479e1e01e728fc49a61a1aec80ec030,
+        type: 3}
+      propertyPath: oldColor.r
+      value: 0.050418306
+      objectReference: {fileID: 0}
+    - target: {fileID: 907750269252520505, guid: e479e1e01e728fc49a61a1aec80ec030,
+        type: 3}
+      propertyPath: oldColor.g
+      value: 0.06281721
+      objectReference: {fileID: 0}
+    - target: {fileID: 907750269252520505, guid: e479e1e01e728fc49a61a1aec80ec030,
+        type: 3}
+      propertyPath: oldColor.b
+      value: 0.103773594
+      objectReference: {fileID: 0}
     - target: {fileID: 907750269252520510, guid: e479e1e01e728fc49a61a1aec80ec030,
         type: 3}
       propertyPath: m_Name
       value: Robot
+      objectReference: {fileID: 0}
+    - target: {fileID: 907750269252520511, guid: e479e1e01e728fc49a61a1aec80ec030,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e479e1e01e728fc49a61a1aec80ec030, type: 3}
