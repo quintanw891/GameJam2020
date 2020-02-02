@@ -849,6 +849,16 @@ PrefabInstance:
       propertyPath: enemyManager
       value: 
       objectReference: {fileID: 1092244447}
+    - target: {fileID: 907750269252520505, guid: e479e1e01e728fc49a61a1aec80ec030,
+        type: 3}
+      propertyPath: fireRate
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 907750269252520506, guid: e479e1e01e728fc49a61a1aec80ec030,
+        type: 3}
+      propertyPath: m_BodyType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 907750269252520510, guid: e479e1e01e728fc49a61a1aec80ec030,
         type: 3}
       propertyPath: m_Name

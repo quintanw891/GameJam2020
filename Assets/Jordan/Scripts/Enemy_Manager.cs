@@ -29,6 +29,6 @@ public class Enemy_Manager : MonoBehaviour
 
     void CreateEnemy ()
     {
-        enemyList.Add(Instantiate(enemy_prefab, new Vector3(5.5f, 6.0f, -88), Quaternion.identity));
+        enemyList.Add(Instantiate(enemy_prefab, new Vector3(5.5f, 6.0f, 0), Quaternion.identity));
     }
 }
