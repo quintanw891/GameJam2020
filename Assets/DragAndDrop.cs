@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class DragAndDrop : MonoBehaviour
 {
+    public GameObject selectedGroup;
     public bool selected;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -20,11 +22,17 @@ public class DragAndDrop : MonoBehaviour
         if(selected == true)
         {
             Vector2 cursorPos = Camera.main.ScreenToWorldPoint(screenPos);
-            transform.position = new Vector2(cursorPos.x, cursorPos.y);
+            if(selectedGroup != null)
+            {
+                selectedGroup.transform.position = new Vector2(cursorPos.x, cursorPos.y);
+            }
+            else
+            {                
+                transform.position = new Vector2(cursorPos.x, cursorPos.y);
+            }
         }
 
-        if(Input.GetMouseButtonUp(0))
-            selected = false;
+            
     }
 
     void OnMouseOver()
@@ -34,4 +42,11 @@ public class DragAndDrop : MonoBehaviour
             selected = true;
         }
     }
+
+    void OnMouseUp()
+    {
+        selected = false;
+    }
+
+
 }
